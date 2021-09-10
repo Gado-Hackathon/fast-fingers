@@ -16,8 +16,8 @@ private:
 	float velocity;
 	bool ctrlKey = false;
 
-	void handleKeyPress();
-	bool isOutOfTheScreen();
+	void HandleKeyPress();
+	bool IsOutOfTheScreen();
 
 public:
 	Key(char ch, float x, float y, float velocity, Scene* scene);

@@ -19,11 +19,11 @@ Key::~Key() {
 	delete sprite;
 }
 
-bool Key::isOutOfTheScreen() {
+bool Key::IsOutOfTheScreen() {
 	return y >= window->Height() + sprite->Height() / 2;
 }
 
-void Key::handleKeyPress() {
+void Key::HandleKeyPress() {
 	int lowercaseKey = tolower(ch);
 	if (ctrlKey && window->KeyDown(ch)) {
 		ctrlKey = false;
@@ -36,8 +36,8 @@ void Key::handleKeyPress() {
 
 void Key::Update() {
 	Translate(0, velocity * gameTime);
-	handleKeyPress();
-	if (isOutOfTheScreen()) {
+	HandleKeyPress();
+	if (IsOutOfTheScreen()) {
 		scene->Delete();
 	}
 }
