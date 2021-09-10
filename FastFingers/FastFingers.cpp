@@ -1,11 +1,11 @@
 /**********************************************************************************
-// PacMan (Código Fonte)
+// PacMan (Cï¿½digo Fonte)
 //
-// Criação:     01 Jan 2013
-// Atualização: 25 Ago 2021
+// Criaï¿½ï¿½o:     01 Jan 2013
+// Atualizaï¿½ï¿½o: 25 Ago 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   Exercício sobre detecção de colisão
+// Descriï¿½ï¿½o:   Exercï¿½cio sobre detecï¿½ï¿½o de colisï¿½o
 //
 **********************************************************************************/
 
@@ -25,10 +25,10 @@ int APIENTRY WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 	engine->window->Mode(BORDERLESS);
 	engine->window->Size(960, 620);
 	engine->window->Color(255, 255, 255);
-	engine->window->Title("PressIt");
+	engine->window->Title("FastFingers");
 	engine->window->Icon(IDI_ICON);
 
-	// configura dispositivo gráfico
+	// configura dispositivo grï¿½fico
 	//engine->graphics->VSync(true);
 
 	// inicia o jogo

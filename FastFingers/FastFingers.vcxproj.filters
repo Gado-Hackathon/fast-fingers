@@ -45,7 +45,7 @@
     <ClCompile Include="Level2.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="PressIt.cpp">
+    <ClCompile Include="FastFingers.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Pivot.cpp">

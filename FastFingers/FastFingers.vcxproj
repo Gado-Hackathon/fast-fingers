@@ -22,9 +22,9 @@
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{E790FA02-70B4-455F-8174-253F45651C7F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>PressIt</RootNamespace>
+    <RootNamespace>FastFingers</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>PressIt</ProjectName>
+    <ProjectName>FastFingers</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -175,7 +175,7 @@
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="PressIt.cpp" />
+    <ClCompile Include="FastFingers.cpp" />
     <ClCompile Include="Pivot.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
