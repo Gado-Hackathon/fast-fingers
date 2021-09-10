@@ -170,12 +170,12 @@
     <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="Graphics.cpp" />
-    <ClCompile Include="Home.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Object.cpp" />
-    <ClCompile Include="PacMan.cpp" />
+    <ClCompile Include="PressIt.cpp" />
     <ClCompile Include="Pivot.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />

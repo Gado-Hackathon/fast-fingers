@@ -1,6 +1,6 @@
 /**********************************************************************************
 // Home (Arquivo de Cabeçalho)
-// 
+//
 // Criação:     18 Jan 2013
 // Atualização: 25 Ago 2021
 // Compilador:  Visual C++ 2019
@@ -20,17 +20,17 @@
 
 // ------------------------------------------------------------------------------
 
-class Home : public Game
+class Menu : public Game
 {
 private:
-    Sprite * backg = nullptr;       // pano de fundo
-    bool ctrlKeyESC = false;        // controle do ESC
+	Sprite* background = nullptr;       // pano de fundo
+	bool ctrlKeyESC = false;        // controle do ESC
 
 public:
-    void Init();                    // inicialização
-    void Update();                  // atualização
-    void Draw();                    // desenho
-    void Finalize();                // finalização
+	void Init();                    // inicialização
+	void Update();                  // atualização
+	void Draw();                    // desenho
+	void Finalize();                // finalização
 };
 
 // -----------------------------------------------------------------------------
