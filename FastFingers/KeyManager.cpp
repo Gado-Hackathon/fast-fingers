@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <vector>
+#include <sstream>
 
 #include "KeyManager.h"
 #include "LevelLoader.h"
@@ -10,7 +11,7 @@ KeyManager::KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitLine) :
 	for (uint i = 0; i < 256; i++) {
 		controls[i] = false;
 	}
-	timer.Start();
+	timer.Stop();
 }
 
 KeyManager::~KeyManager() {
@@ -30,6 +31,14 @@ void KeyManager::addAll(vector<KeyInfo> keysInfo) {
 }
 
 void KeyManager::Update() {
+	if (timer.Stopped()) {
+		timer.Reset();
+	}
+#if _DEBUG
+	stringstream stream;
+	stream << timer.Elapsed() << endl;
+	OutputDebugString(stream.str().c_str());
+#endif
 	/*
 	float secondsBetweenSpawns = 1.0f;
 	float seconds = timer.Elapsed();
@@ -42,11 +51,18 @@ void KeyManager::Update() {
 		scene->Add(key, MOVING);
 	}
 	*/
-	while (!keysToBeSpawned.empty() && keysToBeSpawned.front()->getTime() >= timer.Elapsed()) {
+	while (!keysToBeSpawned.empty()) {
 		auto key = keysToBeSpawned.front();
-		keysToBeSpawned.pop();
-		keys[key->getCharacter()].push(key);
-		scene->Add(key, MOVING);
+		auto keyTime = key->getTime();
+		auto currentTime = timer.Elapsed();
+		if (currentTime >= keyTime) {
+			keysToBeSpawned.pop();
+			keys[key->getCharacter()].push(key);
+			scene->Add(key, MOVING);
+		}
+		else {
+			break;
+		}
 	}
 	handleKeyPress();
 }
