@@ -18,6 +18,7 @@
 #include "HitLine.h"
 #include "Key.h"
 #include "Scoreboard.h"
+#include "KeyManager.h"
 
 #include <string>
 #include <fstream>
@@ -38,10 +39,10 @@ void Level1::Init()
 	scene = new Scene();
 	scene->Add(new Background(), STATIC);
 	scene->Add(new HitLine(), STATIC);
-	scene->Add(new Key('W', window->Width() / 2.0f - 150, 300.0f, 100.0f, scene), MOVING);
-	scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
-	scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
+	// scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
+	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
 	scene->Add(new Scoreboard(4269), STATIC);
+	scene->Add(new KeyManager(scene), STATIC);
 
 	// for (int i = 0; i < 10; i++) {
 	// 	scene->Add(new Key(i % 2 == 0 ? 'W' : 'Q', distributionX(mt), distributionY(mt), distributionVelocity(mt)), MOVING);

@@ -28,6 +28,7 @@ void Key::HandleKeyPress() {
 	if (ctrlKey && window->KeyDown(ch)) {
 		ctrlKey = false;
 		scene->Delete();
+		this->onDeletedCallback();
 	}
 	else if (window->KeyUp(ch)) {
 		ctrlKey = true;
@@ -39,6 +40,7 @@ void Key::Update() {
 	HandleKeyPress();
 	if (IsOutOfTheScreen()) {
 		scene->Delete();
+		this->onDeletedCallback();
 	}
 }
 
