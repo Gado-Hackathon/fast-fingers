@@ -38,9 +38,9 @@ void Key::OnCollision(Object* obj) {
 		auto hitline = static_cast<HitLine*>(obj);
 		auto distance = abs(hitline->Y() - y);
 		// o score é inversamente proporcional à distância do centro do HitLine
-		// porém a distância pode ser 0, então setamos 0.01 *just in case
+		// porém a distância pode ser 0, então setamos 0.01 *just in case*
 		// além disso exatamente no centro ele chegaria a números altos como 572
-		// então limitamos a [maximumScore]
+		// então limitamos a 100
 		const auto maximumScore = 50.0f;
 		const auto minimumDistance = 0.01f;
 		const auto scoreFactor = 100;
