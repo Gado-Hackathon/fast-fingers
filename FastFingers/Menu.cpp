@@ -44,7 +44,7 @@ void Menu::Update()
 
 	// passa ao primeiro nível com ENTER
 	if (window->KeyDown(VK_RETURN))
-		Engine::Next<Level1>();
+		Engine::Next(new Level1());
 }
 
 // ------------------------------------------------------------------------------

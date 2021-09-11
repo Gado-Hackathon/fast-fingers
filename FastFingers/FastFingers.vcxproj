@@ -174,10 +174,11 @@
     <ClCompile Include="HitLine.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="KeyManager.cpp" />
+    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="Level2.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="FastFingers.cpp" />
@@ -194,6 +195,7 @@
   <ItemGroup>
     <ClInclude Include="Background.h" />
     <ClInclude Include="KeyManager.h" />
+    <ClInclude Include="Level1.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Engine.h" />
@@ -206,7 +208,7 @@
     <ClInclude Include="Home.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Key.h" />
-    <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="Level2.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="PacMan.h" />

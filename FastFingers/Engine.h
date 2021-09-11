@@ -5,11 +5,11 @@
 // Atualização: 25 Ago 2021
 // Compilador:  Visual C++ 2019
 //
-// Descrição:   A função da Engine é rodar jogos criados a partir da classe 
-//              abstrata Game. Todo jogo deve ser uma classe derivada de Game 
-//              e portanto deve implementar as funções membro Init, Update, Draw 
-//              e Finalize, que serão chamadas pelo motor em um laço de tempo real. 
-//              Para usar a classe Engine, o programador deve criar uma instância 
+// Descrição:   A função da Engine é rodar jogos criados a partir da classe
+//              abstrata Game. Todo jogo deve ser uma classe derivada de Game
+//              e portanto deve implementar as funções membro Init, Update, Draw
+//              e Finalize, que serão chamadas pelo motor em um laço de tempo real.
+//              Para usar a classe Engine, o programador deve criar uma instância
 //              e chamar o método Start(), passando um objeto derivado de Game.
 //
 **********************************************************************************/
@@ -30,38 +30,43 @@
 class Engine
 {
 private:
-    static Timer timer;                  // medidor de tempo
-    static bool paused;                  // estado do jogo
+	static Timer timer;                  // medidor de tempo
+	static bool paused;                  // estado do jogo
 
-    float FrameTime();                   // calcula o tempo do quadro
-    int   Loop();                        // inicia execução do jogo
+	float FrameTime();                   // calcula o tempo do quadro
+	int   Loop();                        // inicia execução do jogo
 
 public:
-    static Game     * game;              // jogo a ser executado
-    static Window   * window;            // janela do jogo
-    static Graphics * graphics;          // dispositivo gráfico
-    static Renderer * renderer;          // renderizador de sprites
-    static float      frameTime;         // tempo do quadro atual
+	static Game* game;              // jogo a ser executado
+	static Window* window;            // janela do jogo
+	static Graphics* graphics;          // dispositivo gráfico
+	static Renderer* renderer;          // renderizador de sprites
+	static float      frameTime;         // tempo do quadro atual
 
-    Engine();                            // construtor
-    ~Engine();                           // destrutor
+	Engine();                            // construtor
+	~Engine();                           // destrutor
 
-    int Start(Game* level);              // inicia a execução do jogo
-    
-    static void Pause();                 // pausa o jogo
-    static void Resume();                // reinicia o jogo
+	int Start(Game* level);              // inicia a execução do jogo
 
-    template<class T>
-    static void Next()                   // muda para próximo nível do jogo
-    {
-        if (game)
-        {
-            game->Finalize();
-            delete game;
-            game = new T();
-            game->Init();
-        }
-    };
+	static void Pause();                 // pausa o jogo
+	static void Resume();                // reinicia o jogo
+
+	template<class T>
+	static void Next()                   // muda para próximo nível do jogo
+	{
+		Next(new T());
+	};
+
+	static void Next(Game* newGame)      // muda para próximo nível do jogo
+	{
+		if (game)
+		{
+			game->Finalize();
+			delete game;
+		}
+		game = newGame;
+		game->Init();
+	};
 };
 
 // ---------------------------------------------------------------------------------
