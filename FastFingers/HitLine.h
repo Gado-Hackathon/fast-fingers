@@ -15,7 +15,7 @@ public:
 
 	bool isKeyBellowAndOut(Key* key);
 
-	inline float Height() {
+	inline int Height() {
 		return sprite->Height();
 	}
 
