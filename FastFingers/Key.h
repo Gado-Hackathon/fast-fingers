@@ -17,16 +17,21 @@ private:
 	Scene* scene = nullptr;
 	float velocity;
 	std::function<void()> onDeletedCallback;
+	float time;
 
 	void HandleKeyPress();
 	bool IsOutOfTheScreen();
 
 public:
-	Key(char ch, float x, float y, float velocity, Scene* scene);
+	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void()> onDeletedCallback);
 	~Key();
 
-	void setOnDeletedCallback(std::function<void()> onDeletedCallback) {
-		this->onDeletedCallback = onDeletedCallback;
+	inline float getTime() {
+		return time;
+	}
+
+	inline char getCharacter() {
+		return ch;
 	}
 
 	inline void markForDeletion() {

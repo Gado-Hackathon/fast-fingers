@@ -9,6 +9,9 @@
 //
 **********************************************************************************/
 
+#include <fstream>
+#include <sstream>
+
 #include "Engine.h"
 #include "Home.h"
 #include "Level1.h"
@@ -19,11 +22,13 @@
 #include "Key.h"
 #include "Scoreboard.h"
 #include "KeyManager.h"
+#include "LevelLoader.h"
 
 #include <string>
 #include <fstream>
 
 using std::ifstream;
+using std::stringstream;
 using std::string;
 
 // ------------------------------------------------------------------------------
@@ -42,46 +47,9 @@ void Level1::Init()
 	// scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
 	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
 	scene->Add(new Scoreboard(4269), STATIC);
-	scene->Add(new KeyManager(scene), STATIC);
-
-	// for (int i = 0; i < 10; i++) {
-	// 	scene->Add(new Key(i % 2 == 0 ? 'W' : 'Q', distributionX(mt), distributionY(mt), distributionVelocity(mt)), MOVING);
-	// }
-
-	/*
-	// cria jogador
-	Player* player = new Player();
-	scene->Add(player, MOVING);
-	// cria pontos de mudan�a de dire��o
-	Pivot* pivot;
-	bool left, right, up, down;
-	float posX, posY;
-
-	// cria piv�s a partir do arquivo
-	ifstream fin;
-	fin.open("PivotsL1.txt");
-	fin >> left;
-	while (!fin.eof())
-	{
-		if (fin.good())
-		{
-			// l� linha de informa��es do piv�
-			fin >> right; fin >> up; fin >> down; fin >> posX; fin >> posY;
-			pivot = new Pivot(left, right, up, down);
-			pivot->MoveTo(posX, posY);
-			scene->Add(pivot, STATIC);
-		}
-		else
-		{
-			// ignora coment�rios
-			fin.clear();
-			char temp[80];
-			fin.getline(temp, 80);
-		}
-		fin >> left;
-	}
-	fin.close();
-	*/
+	auto keyManager = new KeyManager(scene);
+	keyManager->addAll(loadLevel("Level1.txt"));
+	scene->Add(keyManager, STATIC);
 }
 
 // ------------------------------------------------------------------------------

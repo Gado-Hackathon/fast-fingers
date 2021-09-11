@@ -6,7 +6,8 @@
 
 using std::stringstream;
 
-Key::Key(char ch, float x, float y, float velocity, Scene* scene) : ch(ch), velocity(velocity), scene(scene) {
+Key::Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void()> onDeletedCallback)
+	: ch(ch), time(time), velocity(velocity), scene(scene), onDeletedCallback(onDeletedCallback) {
 	state = KeyState::ALIVE;
 	stringstream stream;
 	stream << "Resources/Keys/" << ch << ".png";
