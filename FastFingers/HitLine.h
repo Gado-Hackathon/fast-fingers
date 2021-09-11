@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Sprite.h"
 #include "ObjectType.h"
+#include "Key.h"
 
 class HitLine : public Object {
 private:
@@ -11,6 +12,12 @@ private:
 public:
 	HitLine();
 	~HitLine();
+
+	bool isKeyBellowAndOut(Key* key);
+
+	inline float Height() {
+		return sprite->Height();
+	}
 
 	inline void Update() {
 

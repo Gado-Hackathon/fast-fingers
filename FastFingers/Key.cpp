@@ -35,6 +35,22 @@ void Key::Update() {
 void Key::OnCollision(Object* obj) {
 	if (obj->Type() == ObjectType::HITLINE) {
 		state = KeyState::REACHED_HITLINE;
-		auto hitline = static_cast<HitLine*>(obj);
+		if (ch == 'R') {
+			auto hitline = static_cast<HitLine*>(obj);
+			auto distance = abs(hitline->Y() - y);
+			// o score é inversamente proporcional à distância do centro do HitLine
+			// porém a distância pode ser 0, então setamos 0.01 *just in case*
+			// além disso exatamente no centro ele chegaria a números altos como 572
+			// então limitamos a 100
+			const auto maximumScore = 50.0f;
+			const auto minimumDistance = 0.01f;
+			const auto scoreFactor = 100;
+			score = min(maximumScore, scoreFactor / max(minimumDistance, distance));
+#if _DEBUG
+			stringstream debug;
+			debug << ch << ": " << score << "\n";
+			OutputDebugString(debug.str().c_str());
+#endif
+		}
 	}
 }

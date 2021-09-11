@@ -15,6 +15,10 @@ public:
 	Scoreboard(int score);
 	~Scoreboard();
 
+	inline void add(int points) {
+		score += points;
+	}
+
 	inline void Update() {
 
 	}

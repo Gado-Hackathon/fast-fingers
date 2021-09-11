@@ -6,7 +6,7 @@
 
 using namespace std;
 
-KeyManager::KeyManager(Scene* scene) : scene(scene) {
+KeyManager::KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitLine) : scene(scene), scoreboard(scoreboard), hitLine(hitLine) {
 	for (uint i = 0; i < 256; i++) {
 		controls[i] = false;
 	}
@@ -59,7 +59,12 @@ void KeyManager::handleKeyPress() {
 			auto keysWithSameCharAsPressedKey = keys[ch];
 			bool hasKeyToDelete = !keysWithSameCharAsPressedKey.empty();
 			if (hasKeyToDelete) {
-				keysWithSameCharAsPressedKey.front()->markForDeletion();
+				auto key = keysWithSameCharAsPressedKey.front();
+				if (!hitLine->isKeyBellowAndOut(key)) {
+					auto points = key->getScore();
+					scoreboard->add(points);
+				}
+				key->markForDeletion();
 			}
 		}
 		else if (window->KeyUp(ch)) {

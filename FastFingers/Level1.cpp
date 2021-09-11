@@ -43,11 +43,13 @@ void Level1::Init()
 	// cria gerenciador de cena
 	scene = new Scene();
 	scene->Add(new Background(), STATIC);
-	scene->Add(new HitLine(), STATIC);
+	auto hitLine = new HitLine();
+	scene->Add(hitLine, STATIC);
 	// scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
 	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
-	scene->Add(new Scoreboard(4269), STATIC);
-	auto keyManager = new KeyManager(scene);
+	auto scoreboard = new Scoreboard(0);
+	scene->Add(scoreboard, STATIC);
+	auto keyManager = new KeyManager(scene, scoreboard, hitLine);
 	keyManager->addAll(loadLevel("Level1.txt"));
 	scene->Add(keyManager, STATIC);
 }

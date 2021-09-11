@@ -1,4 +1,6 @@
 #include <sstream>
+
+#include "Key.h"
 #include "Scoreboard.h"
 
 using std::stringstream;

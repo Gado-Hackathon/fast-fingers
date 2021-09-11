@@ -18,6 +18,7 @@ private:
 	float velocity;
 	std::function<void()> onDeletedCallback;
 	float time;
+	float score = 0;
 
 	void HandleKeyPress();
 	bool IsOutOfTheScreen();
@@ -25,6 +26,10 @@ private:
 public:
 	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void()> onDeletedCallback);
 	~Key();
+
+	inline int getScore() {
+		return int(score);
+	}
 
 	inline float getTime() {
 		return time;
