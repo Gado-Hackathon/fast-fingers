@@ -32,8 +32,8 @@ void Scoreboard::Draw() {
 }
 
 void Scoreboard::DrawDigit(int digit, int digitIndex) {
-	const int marginTop = 96;
-	const int marginRight = 48;
-	const int spriteWidth = sprites[0]->Width();
+	const auto marginTop = 96.0f;
+	const auto marginRight = 48.0f;
+	const auto spriteWidth = sprites[0]->Width();
 	sprites[digit]->Draw(window->Width() - marginRight - digitIndex * spriteWidth, marginTop);
 }
