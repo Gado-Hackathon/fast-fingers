@@ -1,7 +1,5 @@
-#include <fstream>
-#include <sstream>
+#include <string>
 
-#include "Engine.h"
 #include "Level.h"
 #include "HitLine.h"
 #include "Key.h"
@@ -9,12 +7,7 @@
 #include "KeyManager.h"
 #include "LevelLoader.h"
 
-#include <string>
-#include <fstream>
-
-using std::ifstream;
-using std::stringstream;
-using std::string;
+using namespace std;
 
 Level::Level(const string& fileName) : fileName(fileName) {
 
