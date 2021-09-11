@@ -6,7 +6,7 @@
 
 using std::stringstream;
 
-Key::Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void()> onDeletedCallback)
+Key::Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(bool)> onDeletedCallback)
 	: ch(ch), time(time), velocity(velocity), scene(scene), onDeletedCallback(onDeletedCallback) {
 	state = KeyState::ALIVE;
 	stringstream stream;
@@ -24,11 +24,17 @@ bool Key::IsOutOfTheScreen() {
 	return y >= window->Height() + sprite->Height() / 2;
 }
 
+bool Key::shouldBeDeleted() {
+	return IsOutOfTheScreen()
+		|| state == KeyState::MARKED_FOR_DELETION_BY_FAILURE
+		|| state == KeyState::MARKED_FOR_DELETION_BY_SUCCESS;
+}
+
 void Key::Update() {
 	Translate(0, velocity * gameTime);
-	if (IsOutOfTheScreen() || state == KeyState::MARKED_FOR_DELETION) {
+	if (shouldBeDeleted()) {
 		scene->Delete();
-		this->onDeletedCallback();
+		this->onDeletedCallback(state == KeyState::MARKED_FOR_DELETION_BY_SUCCESS);
 	}
 }
 

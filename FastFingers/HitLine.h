@@ -13,8 +13,6 @@ public:
 	HitLine();
 	~HitLine();
 
-	bool isKeyBellowAndOut(Key* key);
-
 	inline int Height() {
 		return sprite->Height();
 	}

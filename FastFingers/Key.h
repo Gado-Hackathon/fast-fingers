@@ -7,7 +7,7 @@
 #include "ObjectType.h"
 #include "Sprite.h"
 
-enum class KeyState { ALIVE, REACHED_HITLINE, MARKED_FOR_DELETION };
+enum class KeyState { ALIVE, REACHED_HITLINE, MARKED_FOR_DELETION_BY_SUCCESS, MARKED_FOR_DELETION_BY_FAILURE };
 
 class Key : public Object {
 private:
@@ -16,15 +16,16 @@ private:
 	Sprite* sprite = nullptr;
 	Scene* scene = nullptr;
 	float velocity;
-	std::function<void()> onDeletedCallback;
+	std::function<void(bool)> onDeletedCallback;
 	float time;
 	float score = 0;
 
+	bool shouldBeDeleted();
 	void HandleKeyPress();
 	bool IsOutOfTheScreen();
 
 public:
-	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void()> onDeletedCallback);
+	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(bool)> onDeletedCallback);
 	~Key();
 
 	inline int getScore() {
@@ -39,8 +40,12 @@ public:
 		return ch;
 	}
 
-	inline void markForDeletion() {
-		state = KeyState::MARKED_FOR_DELETION;
+	inline void markForDeletionWithSuccess() {
+		state = KeyState::MARKED_FOR_DELETION_BY_SUCCESS;
+	}
+
+	inline void markForDeletionWithFailure() {
+		state = KeyState::MARKED_FOR_DELETION_BY_FAILURE;
 	}
 
 	void Update();

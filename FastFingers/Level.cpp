@@ -6,6 +6,7 @@
 #include "Scoreboard.h"
 #include "KeyManager.h"
 #include "LevelLoader.h"
+#include "Health.h"
 
 using namespace std;
 
@@ -27,7 +28,9 @@ void Level::Init() {
 	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
 	auto scoreboard = new Scoreboard(0);
 	scene->Add(scoreboard, STATIC);
-	auto keyManager = new KeyManager(scene, scoreboard, hitLine);
+	auto health = new Health();
+	scene->Add(health, STATIC);
+	auto keyManager = new KeyManager(scene, scoreboard, hitLine, health);
 	keyManager->addAll(loadLevel(fileName));
 	scene->Add(keyManager, STATIC);
 }

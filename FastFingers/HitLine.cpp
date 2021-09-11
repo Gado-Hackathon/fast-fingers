@@ -8,10 +8,6 @@ HitLine::HitLine() {
 	BBox(new Rect(-sprite->Width() / 2.0f, -sprite->Height() / 2.0f, sprite->Width() / 2.0f, sprite->Height() / 2.0f));
 }
 
-bool HitLine::isKeyBellowAndOut(Key* key) {
-	return key->Y() > y + sprite->Height();
-}
-
 HitLine::~HitLine() {
 	delete sprite;
 }

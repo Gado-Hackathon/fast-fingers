@@ -7,7 +7,8 @@
 
 using namespace std;
 
-KeyManager::KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitLine) : scene(scene), scoreboard(scoreboard), hitLine(hitLine) {
+KeyManager::KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitLine, Health* health)
+	: scene(scene), scoreboard(scoreboard), hitLine(hitLine), health(health) {
 	for (uint i = 0; i < 256; i++) {
 		controls[i] = false;
 	}
@@ -23,8 +24,11 @@ void KeyManager::addAll(vector<KeyInfo> keysInfo) {
 		return a.time < b.time;
 	});
 	for (const auto& keyInfo : keysInfo) {
-		auto key = new Key(keyInfo.ch, keyInfo.x, keyInfo.y, keyInfo.time, keyInfo.velocity, scene, [this, keyInfo]() {
+		auto key = new Key(keyInfo.ch, keyInfo.x, keyInfo.y, keyInfo.time, keyInfo.velocity, scene, [this, keyInfo](bool success) {
 			keys[keyInfo.ch].pop();
+			if (!success) {
+				health->lose(10);
+			}
 		});
 		keysToBeSpawned.push(key);
 	}
@@ -76,11 +80,15 @@ void KeyManager::handleKeyPress() {
 			bool hasKeyToDelete = !keysWithSameCharAsPressedKey.empty();
 			if (hasKeyToDelete) {
 				auto key = keysWithSameCharAsPressedKey.front();
-				if (!hitLine->isKeyBellowAndOut(key)) {
+				auto keyAndHitLineAreColliding = scene->Collision(key, hitLine);
+				if (keyAndHitLineAreColliding) {
 					auto points = key->getScore();
 					scoreboard->add(points);
+					key->markForDeletionWithSuccess();
 				}
-				key->markForDeletion();
+				else {
+					key->markForDeletionWithFailure();
+				}
 			}
 		}
 		else if (window->KeyUp(ch)) {

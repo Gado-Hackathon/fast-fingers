@@ -11,6 +11,7 @@
 #include "LevelLoader.h"
 #include "Scoreboard.h"
 #include "HitLine.h"
+#include "Health.h"
 
 class KeyManager : public Object {
 private:
@@ -23,11 +24,12 @@ private:
 	bool ctrlKey = false;
 	std::queue<Key*> keysToBeSpawned;
 	HitLine* hitLine;
+	Health* health;
 
 	void handleKeyPress();
 
 public:
-	KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitline);
+	KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitline, Health* health);
 	~KeyManager();
 
 	void addAll(std::vector<KeyInfo> keysInfo);
