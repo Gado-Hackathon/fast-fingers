@@ -198,7 +198,7 @@
     <ClInclude Include="Geometry.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="HitLine.h" />
-    <ClInclude Include="Home.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Level.h" />
