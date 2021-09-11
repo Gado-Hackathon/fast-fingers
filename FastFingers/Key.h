@@ -7,7 +7,7 @@
 #include "ObjectType.h"
 #include "Sprite.h"
 
-enum class KeyState { ALIVE, REACHED_HITLINE };
+enum class KeyState { ALIVE, REACHED_HITLINE, MARKED_FOR_DELETION };
 
 class Key : public Object {
 private:
@@ -16,7 +16,6 @@ private:
 	Sprite* sprite = nullptr;
 	Scene* scene = nullptr;
 	float velocity;
-	bool ctrlKey = false;
 	std::function<void()> onDeletedCallback;
 
 	void HandleKeyPress();
@@ -28,6 +27,10 @@ public:
 
 	void setOnDeletedCallback(std::function<void()> onDeletedCallback) {
 		this->onDeletedCallback = onDeletedCallback;
+	}
+
+	inline void markForDeletion() {
+		state = KeyState::MARKED_FOR_DELETION;
 	}
 
 	void Update();

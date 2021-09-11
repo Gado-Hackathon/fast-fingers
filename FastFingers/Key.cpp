@@ -23,22 +23,9 @@ bool Key::IsOutOfTheScreen() {
 	return y >= window->Height() + sprite->Height() / 2;
 }
 
-void Key::HandleKeyPress() {
-	int lowercaseKey = tolower(ch);
-	if (ctrlKey && window->KeyDown(ch)) {
-		ctrlKey = false;
-		scene->Delete();
-		this->onDeletedCallback();
-	}
-	else if (window->KeyUp(ch)) {
-		ctrlKey = true;
-	}
-}
-
 void Key::Update() {
 	Translate(0, velocity * gameTime);
-	HandleKeyPress();
-	if (IsOutOfTheScreen()) {
+	if (IsOutOfTheScreen() || state == KeyState::MARKED_FOR_DELETION) {
 		scene->Delete();
 		this->onDeletedCallback();
 	}
