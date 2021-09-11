@@ -30,28 +30,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Food.cpp">
-      <Filter>Game\Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Ghost.cpp">
-      <Filter>Game\Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Level.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Level2.cpp">
-      <Filter>Game\Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="FastFingers.cpp">
-      <Filter>Game\Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Pivot.cpp">
-      <Filter>Game\Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
@@ -131,25 +116,10 @@
     <ClInclude Include="Resources.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Food.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Ghost.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Home.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Level.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Level2.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="PacMan.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -175,9 +145,6 @@
     </ClInclude>
     <ClInclude Include="Object.h">
       <Filter>Engine\Arquivos de Cabeçalho</Filter>
-    </ClInclude>
-    <ClInclude Include="Pivot.h">
-      <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
