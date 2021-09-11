@@ -43,7 +43,7 @@ void Menu::Update()
 	}
 
 	// passa ao primeiro nível com ENTER
-	if (window->KeyDown(VK_RETURN))
+	if (window->KeyDown(VK_SPACE))
 		Engine::Next(new Level1());
 }
 
