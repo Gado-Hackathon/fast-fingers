@@ -12,10 +12,12 @@
 #include "Scoreboard.h"
 #include "HitLine.h"
 #include "Health.h"
+#include "Level.h"
 
 class KeyManager : public Object {
 private:
 	float timerDelay = 0;
+	Level* level;
 	Scene* scene;
 	Scoreboard* scoreboard;
 	std::unordered_map<char, std::queue<Key*>> keys;
@@ -25,12 +27,12 @@ private:
 	std::queue<Key*> keysToBeSpawned;
 	HitLine* hitLine;
 	Health* health;
+	std::function<void()> onGameOver;
 
 	void handleKeyPress();
 
 public:
-	KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitline, Health* health);
-	~KeyManager();
+	KeyManager(Level* level, Scene* scene, Scoreboard* scoreboard, HitLine* hitline, Health* health, std::function<void()> onGameOver);
 
 	void addAll(std::vector<KeyInfo> keysInfo);
 	void Update();

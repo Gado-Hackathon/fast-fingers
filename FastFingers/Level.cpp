@@ -7,6 +7,10 @@
 #include "KeyManager.h"
 #include "LevelLoader.h"
 #include "Health.h"
+#include "Engine.h"
+#include "Menu.h"
+#include "GameOver.h"
+#include "Level1.h"
 
 using namespace std;
 
@@ -26,11 +30,13 @@ void Level::Init() {
 	scene->Add(hitLine, STATIC);
 	// scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
 	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
-	auto scoreboard = new Scoreboard(0);
+	scoreboard = new Scoreboard(0);
 	scene->Add(scoreboard, STATIC);
 	auto health = new Health();
 	scene->Add(health, STATIC);
-	auto keyManager = new KeyManager(scene, scoreboard, hitLine, health);
+	auto keyManager = new KeyManager(this, scene, scoreboard, hitLine, health, [this]() {
+		markGameOver();
+	});
 	keyManager->addAll(loadLevel(fileName));
 	scene->Add(keyManager, STATIC);
 }
@@ -40,6 +46,12 @@ void Level::Finalize() {
 }
 
 void Level::Update() {
+	if (isGameOver) {
+		auto level = copy();
+		auto gameOver = new GameOver(scoreboard->getScore(), level);
+		Engine::Next(gameOver);
+		return;
+	}
 	if (ctrlKeyB && window->KeyDown('B')) {
 		viewBBox = !viewBBox;
 		ctrlKeyB = false;

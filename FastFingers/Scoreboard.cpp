@@ -11,10 +11,13 @@ Scoreboard::Scoreboard(int score) : score(score) {
 		stream << "Resources/Score/" << i << ".png";
 		sprites.push_back(new Sprite(stream.str()));
 	}
+	const auto marginTop = 96.0f;
+	const auto marginRight = 48.0f;
+	MoveTo(window->Width() - marginRight, marginTop);
 }
 
-Scoreboard::~Scoreboard() {
-
+Scoreboard::Scoreboard(int score, float x, float y) : Scoreboard(score) {
+	MoveTo(x, y);
 }
 
 void Scoreboard::Draw() {
@@ -32,8 +35,6 @@ void Scoreboard::Draw() {
 }
 
 void Scoreboard::DrawDigit(int digit, int digitIndex) {
-	const auto marginTop = 96.0f;
-	const auto marginRight = 48.0f;
 	const auto spriteWidth = sprites[0]->Width();
-	sprites[digit]->Draw(window->Width() - marginRight - digitIndex * spriteWidth, marginTop);
+	sprites[digit]->Draw(x - digitIndex * spriteWidth, y);
 }

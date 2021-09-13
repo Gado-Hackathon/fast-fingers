@@ -14,6 +14,10 @@ public:
 	Health(int health = 100);
 	~Health();
 
+	inline bool isDead() {
+		return health == 0;
+	}
+
 	void lose(int health);
 
 	inline void Update() {

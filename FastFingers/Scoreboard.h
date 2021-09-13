@@ -13,7 +13,11 @@ private:
 
 public:
 	Scoreboard(int score);
-	~Scoreboard();
+	Scoreboard(int score, float x, float y);
+
+	inline int getScore() {
+		return score;
+	}
 
 	inline void add(int points) {
 		score += points;

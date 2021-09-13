@@ -4,19 +4,19 @@
 
 #include "KeyManager.h"
 #include "LevelLoader.h"
+#include "GameOver.h"
+#include "Engine.h"
+#include "Level1.h"
+#include "Menu.h"
 
 using namespace std;
 
-KeyManager::KeyManager(Scene* scene, Scoreboard* scoreboard, HitLine* hitLine, Health* health)
-	: scene(scene), scoreboard(scoreboard), hitLine(hitLine), health(health) {
+KeyManager::KeyManager(Level* level, Scene* scene, Scoreboard* scoreboard, HitLine* hitLine, Health* health, std::function<void()> onGameOver)
+	: level(level), scene(scene), scoreboard(scoreboard), hitLine(hitLine), health(health), onGameOver(onGameOver) {
 	for (uint i = 0; i < 256; i++) {
 		controls[i] = false;
 	}
 	timer.Stop();
-}
-
-KeyManager::~KeyManager() {
-
 }
 
 void KeyManager::addAll(vector<KeyInfo> keysInfo) {
@@ -27,7 +27,10 @@ void KeyManager::addAll(vector<KeyInfo> keysInfo) {
 		auto key = new Key(keyInfo.ch, keyInfo.x, keyInfo.y, keyInfo.time, keyInfo.velocity, scene, [this, keyInfo](bool success) {
 			keys[keyInfo.ch].pop();
 			if (!success) {
-				health->lose(10);
+				health->lose(level->healthLostPerMistake());
+				if (health->isDead()) {
+					onGameOver();
+				}
 			}
 		});
 		keysToBeSpawned.push(key);
