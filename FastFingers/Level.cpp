@@ -8,7 +8,6 @@
 #include "LevelLoader.h"
 #include "Health.h"
 #include "Engine.h"
-#include "Menu.h"
 #include "GameOver.h"
 #include "Level1.h"
 
@@ -19,17 +18,10 @@ Level::Level(const string& fileName) : fileName(fileName) {
 }
 
 void Level::Init() {
-	mt = mt19937(rd());
-	distributionX = uniform_real_distribution<float>(0.0f, float(window->Width()));
-	distributionY = uniform_real_distribution<float>(-200.0f, 0);
-	distributionVelocity = uniform_real_distribution<float>(100.0f, 150.0f);
-
 	scene = new Scene();
 	scene->Add(new Background(), STATIC);
 	auto hitLine = new HitLine();
 	scene->Add(hitLine, STATIC);
-	// scene->Add(new Key('Q', window->Width() / 2.0f, 200.0f, 100.0f, scene), MOVING);
-	// scene->Add(new Key('R', window->Width() / 2.0f - 100, 100.0f, 100.0f, scene), MOVING);
 	scoreboard = new Scoreboard(0);
 	scene->Add(scoreboard, STATIC);
 	auto health = new Health();

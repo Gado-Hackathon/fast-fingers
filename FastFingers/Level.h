@@ -1,9 +1,6 @@
 #pragma once
 
-#include <random>
-
 #include "Game.h"
-#include "Sprite.h"
 #include "Scene.h"
 #include "Background.h"
 #include "Scoreboard.h"
@@ -13,9 +10,6 @@ using namespace std;
 class Level : public Game
 {
 private:
-	random_device rd;
-	mt19937 mt;
-	uniform_real_distribution<float> distributionX, distributionY, distributionVelocity;
 	Scene* scene = nullptr;         // gerenciador de cena
 	Scoreboard* scoreboard = nullptr;
 	string fileName;
