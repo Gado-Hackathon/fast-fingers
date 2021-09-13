@@ -9,6 +9,8 @@
 
 enum class KeyState { ALIVE, REACHED_HITLINE, MARKED_FOR_DELETION_BY_SUCCESS, MARKED_FOR_DELETION_BY_FAILURE };
 
+struct Deletion;
+
 class Key : public Object {
 private:
 	char ch;
@@ -16,7 +18,7 @@ private:
 	Sprite* sprite = nullptr;
 	Scene* scene = nullptr;
 	float velocity;
-	std::function<void(bool)> onDeletedCallback;
+	std::function<void(Deletion)> onDeletedCallback;
 	float time;
 	float score = 0;
 
@@ -25,7 +27,7 @@ private:
 	bool IsOutOfTheScreen();
 
 public:
-	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(bool)> onDeletedCallback);
+	Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(Deletion)> onDeletedCallback);
 	~Key();
 
 	inline int getScore() {
@@ -59,4 +61,11 @@ public:
 	inline void Draw() {
 		sprite->Draw(x, y, Layer::FRONT);
 	}
+};
+
+struct Deletion {
+	bool success;
+	Key* key;
+
+	Deletion(bool success, Key* key) : success(success), key(key) {}
 };

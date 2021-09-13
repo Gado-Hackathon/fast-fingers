@@ -6,7 +6,7 @@
 
 using std::stringstream;
 
-Key::Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(bool)> onDeletedCallback)
+Key::Key(char ch, float x, float y, float time, float velocity, Scene* scene, std::function<void(Deletion)> onDeletedCallback)
 	: ch(ch), time(time), velocity(velocity), scene(scene), onDeletedCallback(onDeletedCallback) {
 	state = KeyState::ALIVE;
 	stringstream stream;
@@ -34,7 +34,8 @@ void Key::Update() {
 	Translate(0, velocity * gameTime);
 	if (shouldBeDeleted()) {
 		scene->Delete();
-		this->onDeletedCallback(state == KeyState::MARKED_FOR_DELETION_BY_SUCCESS);
+		auto deletion = Deletion(state == KeyState::MARKED_FOR_DELETION_BY_SUCCESS, this);
+		this->onDeletedCallback(deletion);
 	}
 }
 

@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <queue>
+#include <deque>
 #include <vector>
 
 #include "Object.h"
@@ -20,7 +21,7 @@ private:
 	Level* level;
 	Scene* scene;
 	Scoreboard* scoreboard;
-	std::unordered_map<char, std::queue<Key*>> keys;
+	std::unordered_map<char, std::vector<Key*>> keys;
 	Timer timer;
 	std::unordered_map<char, bool> controls;
 	bool ctrlKey = false;

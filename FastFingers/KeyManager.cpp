@@ -8,6 +8,7 @@
 #include "Engine.h"
 #include "Level1.h"
 #include "Menu.h"
+#include "Key.h"
 
 using namespace std;
 
@@ -24,13 +25,24 @@ void KeyManager::addAll(vector<KeyInfo> keysInfo) {
 		return a.time < b.time;
 	});
 	for (const auto& keyInfo : keysInfo) {
-		auto key = new Key(keyInfo.ch, keyInfo.x, keyInfo.y, keyInfo.time, keyInfo.velocity, scene, [this, keyInfo](bool success) {
-			keys[keyInfo.ch].pop();
-			if (!success) {
-				health->lose(level->healthLostPerMistake());
-				if (health->isDead()) {
-					onGameOver();
+		auto key = new Key(keyInfo.ch, keyInfo.x, keyInfo.y, keyInfo.time, keyInfo.velocity, scene, [this, keyInfo](Deletion deletion) {
+			for (int i = 0; i < keys[keyInfo.ch].size(); ++i) {
+				auto key = keys[keyInfo.ch][i];
+
+				if (key != deletion.key) {
+					continue;
 				}
+
+				if (!deletion.success) {
+					health->lose(level->healthLostPerMistake());
+
+					if (health->isDead()) {
+						onGameOver();
+					}
+				}
+
+				keys[keyInfo.ch].erase(keys[keyInfo.ch].begin() + i);
+				break;
 			}
 		});
 		keysToBeSpawned.push(key);
@@ -52,7 +64,7 @@ void KeyManager::Update() {
 		auto currentTime = timer.Elapsed();
 		if (currentTime >= keyTime) {
 			keysToBeSpawned.pop();
-			keys[key->getCharacter()].push(key);
+			keys[key->getCharacter()].push_back(key);
 			scene->Add(key, MOVING);
 		}
 		else {
@@ -68,16 +80,26 @@ void KeyManager::handleKeyPress() {
 			controls[ch] = false;
 			auto keysWithSameCharAsPressedKey = keys[ch];
 			bool hasKeyToDelete = !keysWithSameCharAsPressedKey.empty();
+
 			if (hasKeyToDelete) {
-				auto key = keysWithSameCharAsPressedKey.front();
-				auto keyAndHitLineAreColliding = scene->Collision(key, hitLine);
-				if (keyAndHitLineAreColliding) {
-					auto points = key->getScore();
-					scoreboard->add(points);
-					key->markForDeletionWithSuccess();
-				}
-				else {
-					key->markForDeletionWithFailure();
+				for (const auto& key : keysWithSameCharAsPressedKey) {
+					auto isBellowHitline = key->Y() > (hitLine->Y() + hitLine->Height());
+					auto keyAndHitLineAreColliding = scene->Collision(key, hitLine);
+
+					if (isBellowHitline) {
+						continue;
+					}
+					
+					if (keyAndHitLineAreColliding) {
+						auto points = key->getScore();
+						scoreboard->add(points);
+						key->markForDeletionWithSuccess();
+					}
+					else {
+						key->markForDeletionWithFailure();
+					}
+
+					break;
 				}
 			}
 		}
