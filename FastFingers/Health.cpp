@@ -24,7 +24,7 @@ Health::~Health() {
 }
 
 void Health::lose(int ammount) {
-	health -= ammount;
+	health = max(health - ammount, 0);
 }
 
 void Health::Draw() {
