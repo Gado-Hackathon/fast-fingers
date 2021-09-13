@@ -28,7 +28,7 @@ public:
 	Level(const string& fileName);
 
 	inline virtual int healthLostPerMistake() {
-		return 100;
+		return 10;
 	}
 
 	virtual Level* copy() = 0;
