@@ -5,7 +5,7 @@
 
 using std::stringstream;
 
-Scoreboard::Scoreboard(int score) : score(score) {
+Scoreboard::Scoreboard(int score, DisplayMode mode) : score(score), mode(mode) {
 	for (int i = 0; i <= 9; i++) {
 		stringstream stream;
 		stream << "Resources/Score/" << i << ".png";
@@ -16,25 +16,39 @@ Scoreboard::Scoreboard(int score) : score(score) {
 	MoveTo(window->Width() - marginRight, marginTop);
 }
 
-Scoreboard::Scoreboard(int score, float x, float y) : Scoreboard(score) {
+Scoreboard::Scoreboard(int score, float x, float y, DisplayMode mode) : Scoreboard(score, mode) {
 	MoveTo(x, y);
 }
 
-void Scoreboard::Draw() {
-	int currentScore = score;
+static std::vector<int> allDigits(int number) {
+	std::vector<int> result;
+	int currentNumber = number;
 	int digitIndex = 0;
-	if (currentScore == 0) {
-		DrawDigit(0, 0);
+	if (currentNumber == 0) {
+		result.push_back(0);
 	}
-	while (currentScore) {
-		int digit = currentScore % 10;
-		DrawDigit(digit, digitIndex);
-		currentScore /= 10;
+	while (currentNumber) {
+		int digit = currentNumber % 10;
+		result.push_back(digit);
+		currentNumber /= 10;
 		digitIndex++;
+	}
+	return result;
+}
+
+void Scoreboard::Draw() {
+	auto digits = allDigits(score);
+	const auto digitsCount = digits.size();
+	for (auto i = 0; i < digitsCount; i++) {
+		DrawDigit(digits[i], i, digitsCount);
 	}
 }
 
-void Scoreboard::DrawDigit(int digit, int digitIndex) {
+void Scoreboard::DrawDigit(int digit, int digitIndex, size_t digitsCount) {
 	const auto spriteWidth = sprites[0]->Width();
-	sprites[digit]->Draw(x - digitIndex * spriteWidth, y);
+	float offsetX = 0;
+	if (mode == DisplayMode::CENTERED) {
+		offsetX = float(spriteWidth) * (digitsCount / 2);
+	}
+	sprites[digit]->Draw(x - digitIndex * spriteWidth + offsetX, y);
 }
