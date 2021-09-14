@@ -2,6 +2,7 @@
 
 #include "Level.h"
 #include "Level2.h"
+#include "GameWin.h"
 
 class Level2 : public Level {
 public:
@@ -10,6 +11,7 @@ public:
 	inline Level* copy() {
 		return new Level2();
 	}
-
+	
+	int healthLostPerMistake();
 	void Update();
 };

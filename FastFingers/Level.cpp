@@ -11,6 +11,7 @@
 #include "GameOver.h"
 #include "Level1.h"
 #include "LevelHeader.h"
+#include "GameWin.h"
 
 using namespace std;
 
@@ -55,7 +56,15 @@ void Level::Update() {
 	}
 
 	if (KeyManager::keyManager->isEmpty()) {
-		Engine::Next(nextLevel);
+		GameWin::totalScore += scoreboard->getScore();
+		
+		if (nextLevel != nullptr) {
+			Engine::Next(nextLevel);
+		}
+		else {
+			Engine::Next(new GameWin(GameWin::totalScore));
+		}
+
 		return;
 	}
 

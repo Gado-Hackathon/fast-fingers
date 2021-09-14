@@ -2,6 +2,10 @@
 #include "Engine.h"
 #include "Menu.h"
 
+int Level2::healthLostPerMistake() {
+	return 50;
+}
+
 void Level2::Update() {
 	if (window->KeyDown(VK_ESCAPE)) {
 		Engine::Next<Menu>();
