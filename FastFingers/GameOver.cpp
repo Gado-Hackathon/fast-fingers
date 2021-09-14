@@ -3,10 +3,12 @@
 #include "Engine.h"
 #include "Menu.h"
 #include "Sprite.h"
+#include "GameWin.h"
 
 GameOver::GameOver(int score, Level* level) : level(level) {
 	sprite = new Sprite("Resources/GameOver.png");
-	scoreboard = new Scoreboard(score, float(window->Width()) / 2, float(window->Height()) / 2);
+	scoreboard = new Scoreboard(GameWin::totalScore, float(window->Width()) / 2, float(window->Height()) / 2);
+	GameWin::totalScore = 0;
 }
 
 void GameOver::Update() {

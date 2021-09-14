@@ -111,6 +111,15 @@
     <ClCompile Include="GameWin.cpp">
       <Filter>Game\Arquivos de Origem</Filter>
     </ClCompile>
+    <ClCompile Include="Level3.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Level4.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Level5.cpp">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine.h">
@@ -200,6 +209,15 @@
     <ClInclude Include="GameWin.h">
       <Filter>Game\Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="Level3.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Level4.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Level5.h">
+      <Filter>Game\Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="FoodL1.txt">
@@ -213,6 +231,15 @@
     </Text>
     <Text Include="PivotsL2.txt">
       <Filter>Game\Arquivos de Recurso</Filter>
+    </Text>
+    <Text Include="Level3.txt">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </Text>
+    <Text Include="Level4.txt">
+      <Filter>Game\Arquivos de Origem</Filter>
+    </Text>
+    <Text Include="Level5.txt">
+      <Filter>Game\Arquivos de Origem</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>

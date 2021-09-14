@@ -1,12 +1,12 @@
-#include "Level2.h"
+#include "Level5.h"
 #include "Engine.h"
 #include "Menu.h"
 
-int Level2::healthLostPerMistake() {
-	return 20;
+int Level5::healthLostPerMistake() {
+	return 100;
 }
 
-void Level2::Update() {
+void Level5::Update() {
 	if (window->KeyDown(VK_ESCAPE)) {
 		Engine::Next<Menu>();
 	}
