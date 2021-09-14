@@ -3,12 +3,12 @@
 #include "Level.h"
 #include "Level2.h"
 
-class Level1 : public Level {
+class Level2 : public Level {
 public:
-	Level1() : Level("Level1.txt", new Level2()) {}
+	Level2() : Level("Level2.txt", nullptr) {}
 
 	inline Level* copy() {
-		return new Level1();
+		return new Level2();
 	}
 
 	void Update();

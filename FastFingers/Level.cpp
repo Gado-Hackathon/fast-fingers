@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Level::Level(const string& fileName) : fileName(fileName) {
+Level::Level(const string& fileName, Level * nextLevel) : fileName(fileName), nextLevel(nextLevel) {
 
 }
 
@@ -26,11 +26,11 @@ void Level::Init() {
 	scene->Add(scoreboard, STATIC);
 	auto health = new Health();
 	scene->Add(health, STATIC);
-	auto keyManager = new KeyManager(this, scene, scoreboard, hitLine, health, [this]() {
+	KeyManager::keyManager = new KeyManager(this, scene, scoreboard, hitLine, health, [this]() {
 		markGameOver();
 	});
-	keyManager->addAll(loadLevel(fileName));
-	scene->Add(keyManager, STATIC);
+	KeyManager::keyManager->addAll(loadLevel(fileName));
+	scene->Add(KeyManager::keyManager, STATIC);
 }
 
 void Level::Finalize() {
@@ -50,6 +50,11 @@ void Level::Update() {
 	}
 	else if (window->KeyUp('B')) {
 		ctrlKeyB = true;
+	}
+
+	if (KeyManager::keyManager->isEmpty()) {
+		Engine::Next(getNextLevel());
+		return;
 	}
 
 	scene->Update();

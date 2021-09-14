@@ -1,9 +1,11 @@
-#pragma once
+#ifndef _PROGJOGOS_LEVEL_H_
+#define _PROGJOGOS_LEVEL_H_
 
 #include "Game.h"
 #include "Scene.h"
 #include "Background.h"
 #include "Scoreboard.h"
+#include "Level.h"
 
 using namespace std;
 
@@ -13,13 +15,14 @@ private:
 	Scene* scene = nullptr;         // gerenciador de cena
 	Scoreboard* scoreboard = nullptr;
 	string fileName;
+	Level* nextLevel = nullptr;
 	bool isGameOver = false;
 
 	bool viewBBox = false;          // habilita visualiza��o da bounding box
 	bool ctrlKeyB = false;          // controle da tecla B
 
 public:
-	Level(const string& fileName);
+	Level(const string& fileName, Level* nextLevel);
 
 	inline virtual int healthLostPerMistake() {
 		return 10;
@@ -31,7 +34,13 @@ public:
 	void Draw();                    // desenha jogo
 	void Finalize();                // finaliza jogo
 
+	inline Level* getNextLevel() {
+		return nextLevel;
+	}
+
 	inline void markGameOver() {
 		isGameOver = true;
 	}
 };
+
+#endif

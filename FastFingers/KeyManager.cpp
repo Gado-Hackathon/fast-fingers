@@ -12,6 +12,8 @@
 
 using namespace std;
 
+KeyManager* KeyManager::keyManager = nullptr;
+
 KeyManager::KeyManager(Level* level, Scene* scene, Scoreboard* scoreboard, HitLine* hitLine, Health* health, std::function<void()> onGameOver)
 	: level(level), scene(scene), scoreboard(scoreboard), hitLine(hitLine), health(health), onGameOver(onGameOver) {
 	for (uint i = 0; i < 256; i++) {
@@ -107,4 +109,17 @@ void KeyManager::handleKeyPress() {
 			controls[ch] = true;
 		}
 	}
+}
+
+bool KeyManager::isEmpty() {
+	bool isKeysEmpty = true;
+
+	for (auto [_, vector] : keys) {
+		if (!vector.empty()) {
+			isKeysEmpty = false;
+			break;
+		}
+	}
+
+	return keysToBeSpawned.empty() && isKeysEmpty;
 }

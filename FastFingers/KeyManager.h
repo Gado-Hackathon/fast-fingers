@@ -1,9 +1,10 @@
-#pragma once
+#ifndef _PROGJOGOS_KEYMAN_H_
+#define _PROGJOGOS_KEYMAN_H_
 
 #include <unordered_map>
 #include <queue>
-#include <deque>
 #include <vector>
+#include <functional>
 
 #include "Object.h"
 #include "Scene.h"
@@ -33,12 +34,17 @@ private:
 	void handleKeyPress();
 
 public:
+	static KeyManager* keyManager;
 	KeyManager(Level* level, Scene* scene, Scoreboard* scoreboard, HitLine* hitline, Health* health, std::function<void()> onGameOver);
 
 	void addAll(std::vector<KeyInfo> keysInfo);
 	void Update();
 
+	bool isEmpty();
+
 	inline void Draw() {
 
 	}
 };
+
+#endif
