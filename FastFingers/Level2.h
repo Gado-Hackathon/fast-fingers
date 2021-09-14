@@ -5,7 +5,7 @@
 
 class Level2 : public Level {
 public:
-	Level2() : Level("Level2.txt", nullptr) {}
+	Level2() : Level("Level2.txt", nullptr, 2) {}
 
 	inline Level* copy() {
 		return new Level2();

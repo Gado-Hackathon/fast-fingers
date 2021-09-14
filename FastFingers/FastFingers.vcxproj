@@ -176,6 +176,7 @@
     <ClCompile Include="KeyManager.cpp" />
     <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="LevelHeader.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="KeyManager.h" />
     <ClInclude Include="Level1.h" />
     <ClInclude Include="Level2.h" />
+    <ClInclude Include="LevelHeader.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Engine.h" />

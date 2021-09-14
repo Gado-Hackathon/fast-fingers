@@ -17,12 +17,13 @@ private:
 	string fileName;
 	Level* nextLevel = nullptr;
 	bool isGameOver = false;
+	int level = 0;
 
 	bool viewBBox = false;          // habilita visualiza��o da bounding box
 	bool ctrlKeyB = false;          // controle da tecla B
 
 public:
-	Level(const string& fileName, Level* nextLevel);
+	Level(const string& fileName, Level* nextLevel, int level);
 
 	inline virtual int healthLostPerMistake() {
 		return 10;
@@ -36,6 +37,10 @@ public:
 
 	inline Level* getNextLevel() {
 		return nextLevel;
+	}
+
+	inline int getLevel() {
+		return level;
 	}
 
 	inline void markGameOver() {

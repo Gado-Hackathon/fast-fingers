@@ -10,15 +10,17 @@
 #include "Engine.h"
 #include "GameOver.h"
 #include "Level1.h"
+#include "LevelHeader.h"
 
 using namespace std;
 
-Level::Level(const string& fileName, Level * nextLevel) : fileName(fileName), nextLevel(nextLevel) {
+Level::Level(const string& fileName, Level * nextLevel, int level) : fileName(fileName), nextLevel(nextLevel), level(level) {
 
 }
 
 void Level::Init() {
 	scene = new Scene();
+	scene->Add(new LevelHeader(getLevel()), STATIC);
 	scene->Add(new Background(), STATIC);
 	auto hitLine = new HitLine();
 	scene->Add(hitLine, STATIC);
@@ -53,7 +55,7 @@ void Level::Update() {
 	}
 
 	if (KeyManager::keyManager->isEmpty()) {
-		Engine::Next(getNextLevel());
+		Engine::Next(nextLevel);
 		return;
 	}
 
